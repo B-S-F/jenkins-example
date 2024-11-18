@@ -14,13 +14,19 @@ pipeline {
                 sh(
                     script: "./yaku_run.sh",
                     label: 'Run Yaku'
-                )
+                ),
+                sh '''
+                    releaseStatus=$(cat release_status.txt)
+                    echo $releaseStatus
+                '''
             }
         }
-        stage('Deploy') {
+        stage('Release approved') {
+            when {
+                expression { releaseStatus == 'Approved' }
+            }
             steps {
-                echo 'Deploying...'
-                // Add deploy commands here, e.g., sh 'scp target/*.jar user@server:/path/to/deploy'
+                echo 'Release has been approved'
             }
         }
     }
