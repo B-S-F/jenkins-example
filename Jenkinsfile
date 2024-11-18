@@ -1,16 +1,20 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
-            steps {
-                echo 'Building.......'
-                // Add build commands here, e.g., sh 'mvn clean install'
+        stage('RUN') {
+            environment {
+                HOME = "${env.WORKSPACE}"
+                YAKU_API_TOKEN = credentials('yaku-token')
+                YAKU_ENV_URL = "http://core-api-yaku.yaku.svc.cluster.local/api/v1"
+                CONFIG_ID = "23"
+                RELEASE_ID = "321"
+                NAMESPACE_ID = "164"
             }
-        }
-        stage('Test') {
             steps {
-                echo 'Testing...'
-                // Add test commands here, e.g., sh 'mvn test'
+                sh(
+                    script: "./yaku_run.sh",
+                    label: 'Run Yaku'
+                )
             }
         }
         stage('Deploy') {
