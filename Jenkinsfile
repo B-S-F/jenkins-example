@@ -1,3 +1,4 @@
+def releaseStatus
 pipeline {
     agent any
     stages {
@@ -15,13 +16,15 @@ pipeline {
                     script: "./yaku_run.sh",
                     label: 'Run Yaku'
                 )
+                sh '''
+                    releaseStatus=$(cat .release_status)
+                    echo $releaseStatus
+                '''             
             }
         }
         stage('Release approved') {
-            when {
-                expression { 
-                    fileExists('.release_status') && readFile('.release_status').trim() == "pending"
-                }
+            when { 
+                expression { releaseStatus == '"pending"' }
             }
             steps {
                 sh 'echo "Release has been approved"'
