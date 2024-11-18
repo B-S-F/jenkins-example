@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building...'
+                echo 'Building.......'
                 // Add build commands here, e.g., sh 'mvn clean install'
             }
         }
