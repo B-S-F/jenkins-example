@@ -1,4 +1,3 @@
-def releaseStatus
 pipeline {
     agent any
     stages {
@@ -16,14 +15,17 @@ pipeline {
                     script: "./yaku_run.sh",
                     label: 'Run Yaku'
                 )
-                sh '''
-                    releaseStatus=$(cat .release_status)
-                    echo $releaseStatus
-                '''             
+                script {
+                    releaseStatus = sh(
+                        script: 'cat .release_status',
+                        returnStdout: true
+                    ).trim()
+                    echo "Release Status: ${releaseStatus}"
+                }
             }
         }
         stage('Release approved') {
-            when { 
+            when {
                 expression { releaseStatus == '"pending"' }
             }
             steps {
