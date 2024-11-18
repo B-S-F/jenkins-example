@@ -23,7 +23,7 @@ pipeline {
         }
         stage('Release approved') {
             when {
-                expression { releaseStatus == 'Approved' }
+                expression { releaseStatus == 'pending' }
             }
             steps {
                 echo 'Release has been approved'
