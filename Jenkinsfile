@@ -5,7 +5,7 @@ pipeline {
             environment {
                 HOME = "${env.WORKSPACE}"
                 YAKU_API_TOKEN = credentials('yaku-token')
-                YAKU_ENV_URL = "http://xx/api/v1"
+                YAKU_ENV_URL = "http://core-api-yaku.yaku.svc.cluster.local/api/v1"
                 CONFIG_ID = "23"
                 RELEASE_ID = "321"
                 NAMESPACE_ID = "164"
