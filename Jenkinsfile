@@ -14,7 +14,7 @@ pipeline {
                 sh(
                     script: "./yaku_run.sh",
                     label: 'Run Yaku'
-                ),
+                )
                 sh '''
                     releaseStatus=$(cat release_status.txt)
                     echo $releaseStatus
