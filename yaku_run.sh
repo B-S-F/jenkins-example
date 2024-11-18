@@ -112,4 +112,4 @@ release_status_json=$(curl -sX'GET' \
 
 release_status=$(echo "$release_status_json" | grep -o '"approvalState"[[:space:]]*:[[:space:]]*"[a-zA-Z]*"' | sed 's/"approvalState"://')
 echo "Release status: $release_status"
-echo $release_status > release_status.txt
+echo $release_status > .release_status
