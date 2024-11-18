@@ -26,7 +26,7 @@ pipeline {
                 expression { releaseStatus == 'pending' }
             }
             steps {
-                echo 'Release has been approved'
+                sh 'echo "Release has been approved"'
             }
         }
     }
